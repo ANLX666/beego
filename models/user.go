@@ -1,6 +1,7 @@
 package models
 
 import (
+	"fmt"
 	"github.com/beego/beego/v2/client/orm"
 )
 
@@ -52,4 +53,11 @@ func GetUserById(id int) *User {
 	}
 
 	return &user
+}
+func GetCount() int64 {
+	fmt.Println(1)
+	o := orm.NewOrm()
+	cnt, err := o.QueryTable(User{}).Count() // SELECT COUNT(*) FROM USER
+	fmt.Printf("Count Num: %s, %s", cnt, err)
+	return cnt
 }

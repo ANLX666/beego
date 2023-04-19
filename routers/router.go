@@ -8,4 +8,6 @@ import (
 func init() {
 	//beego.Router("/", &controllers.MainController{})
 	beego.Router("/user/:id", &controllers.MainController{})
+	beego.Router("/*", &controllers.CountController{})
+	//beego.Get("/getUserCount", &controllers.CountController{})
 }

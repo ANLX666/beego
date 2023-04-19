@@ -10,6 +10,9 @@ import (
 type MainController struct {
 	beego.Controller
 }
+type CountController struct {
+	beego.Controller
+}
 
 func (c *MainController) Get() {
 	c.Data["Website"] = "1209322734.com"
@@ -28,5 +31,14 @@ func (c *MainController) Get() {
 	fmt.Println(user)
 	//c.Data["user"] = user
 	// 使用新的视图模板user.tpl
+	c.TplName = "user.tpl"
+}
+func (c *CountController) GetUserCount() {
+	c.Data["Website"] = "1209322734.com"
+	c.Data["Email"] = "1209322734@demo.com"
+	fmt.Println(1)
+	count := models.GetCount()
+	c.Controller.Data["json"] = count
+	c.ServeJSON()
 	c.TplName = "user.tpl"
 }
