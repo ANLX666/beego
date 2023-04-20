@@ -22,6 +22,9 @@ type GetUserList struct {
 type DeleteUser struct {
 	beego.Controller
 }
+type AddUser struct {
+	beego.Controller
+}
 
 func (c *MainController) Get() {
 	c.Data["Website"] = "1209322734.com"
@@ -65,6 +68,15 @@ func (c *GetUserList) Get() {
 func (c *DeleteUser) Delete() {
 	id := c.Ctx.Input.Param(":id")
 	user := models.DeleteUser(id)
+	c.Controller.Data["json"] = user
+	c.ServeJSON()
+	c.TplName = "user.tpl"
+}
+func (c *AddUser) Post() {
+	username := c.Ctx.Input.Param(":username")
+	password := c.Ctx.Input.Param(":password")
+
+	user := models.AddUser(username, password)
 	c.Controller.Data["json"] = user
 	c.ServeJSON()
 	c.TplName = "user.tpl"

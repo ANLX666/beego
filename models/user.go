@@ -74,3 +74,14 @@ func DeleteUser(id string) int64 {
 	i, _ := o.QueryTable("users").Filter("id", id).Delete()
 	return i
 }
+
+func AddUser(username string, password string) int64 {
+	o := orm.NewOrm()
+	var user User
+	//user.Id = 1230
+	user.Username = username
+	user.Password = password
+	insert, _ := o.Insert(&user)
+	fmt.Println(insert)
+	return insert
+}

@@ -12,4 +12,6 @@ func init() {
 	beego.Router("/index", &controllers.IndexController{})
 	beego.Router("/getUserList", &controllers.GetUserList{})
 	beego.Router("/deleteUser/:id", &controllers.DeleteUser{})
+	beego.Router("/addUser/:username/:password", &controllers.AddUser{})
+
 }
