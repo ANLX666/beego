@@ -16,6 +16,9 @@ type CountController struct {
 type IndexController struct {
 	beego.Controller
 }
+type GetUserList struct {
+	beego.Controller
+}
 
 func (c *MainController) Get() {
 	c.Data["Website"] = "1209322734.com"
@@ -49,4 +52,10 @@ func (c *CountController) Get() {
 func (c *IndexController) Post() {
 	c.Data["test"] = "区块链"
 	c.TplName = "test.html"
+}
+func (c *GetUserList) Get() {
+	UserList := models.GetUserArr()
+	c.Controller.Data["json"] = UserList
+	c.ServeJSON()
+	c.TplName = "user.tpl"
 }

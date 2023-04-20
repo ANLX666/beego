@@ -61,3 +61,11 @@ func GetCount() int64 {
 	fmt.Printf("Count Num: %s, %s", cnt, err)
 	return cnt
 }
+func GetUserArr() []User {
+	o := orm.NewOrm()
+	arr := o.QueryTable("users")
+	var users []User
+	all, _ := arr.All(&users)
+	fmt.Println(all)
+	return users
+}
