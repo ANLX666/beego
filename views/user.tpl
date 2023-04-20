@@ -12,5 +12,8 @@
 {{else}}
 查找不到用户
 {{ end }}
+    <form method="post" action="/index">
+        <input type="submit">
+    </form>
 </body>
 </html>

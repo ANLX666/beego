@@ -13,6 +13,9 @@ type MainController struct {
 type CountController struct {
 	beego.Controller
 }
+type IndexController struct {
+	beego.Controller
+}
 
 func (c *MainController) Get() {
 	c.Data["Website"] = "1209322734.com"
@@ -33,7 +36,8 @@ func (c *MainController) Get() {
 	// 使用新的视图模板user.tpl
 	c.TplName = "user.tpl"
 }
-func (c *CountController) GetUserCount() {
+
+func (c *CountController) Get() {
 	c.Data["Website"] = "1209322734.com"
 	c.Data["Email"] = "1209322734@demo.com"
 	fmt.Println(1)
@@ -41,4 +45,8 @@ func (c *CountController) GetUserCount() {
 	c.Controller.Data["json"] = count
 	c.ServeJSON()
 	c.TplName = "user.tpl"
+}
+func (c *IndexController) Post() {
+	c.Data["test"] = "区块链"
+	c.TplName = "test.html"
 }

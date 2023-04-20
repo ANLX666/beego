@@ -57,7 +57,7 @@ func GetUserById(id int) *User {
 func GetCount() int64 {
 	fmt.Println(1)
 	o := orm.NewOrm()
-	cnt, err := o.QueryTable(User{}).Count() // SELECT COUNT(*) FROM USER
+	cnt, err := o.QueryTable("users").Count() // SELECT COUNT(*) FROM USER
 	fmt.Printf("Count Num: %s, %s", cnt, err)
 	return cnt
 }
