@@ -3,6 +3,7 @@ package controllers
 import (
 	"beegoProject/models"
 	"fmt"
+	"github.com/beego/beego/v2/client/orm"
 	beego "github.com/beego/beego/v2/server/web"
 	"strconv"
 )
@@ -23,6 +24,9 @@ type DeleteUser struct {
 	beego.Controller
 }
 type AddUser struct {
+	beego.Controller
+}
+type RegisterMain struct {
 	beego.Controller
 }
 
@@ -80,4 +84,25 @@ func (c *AddUser) Post() {
 	c.Controller.Data["json"] = user
 	c.ServeJSON()
 	c.TplName = "user.tpl"
+}
+func (c *RegisterMain) PostRegister() {
+	userName := c.GetStrings("userName")
+	password := c.GetStrings("password")
+	o := orm.NewOrm()
+	user := models.User{}
+	fmt.Println(userName)
+	fmt.Println(password)
+
+	user.Username = userName[0]
+	user.Password = password[0]
+	_, err := o.Insert(&user)
+	if err != nil {
+		fmt.Println(err)
+		c.Redirect("/register", 302)
+	}
+	c.Ctx.WriteString("注册成功")
+}
+func (c *RegisterMain) GetRegister() {
+
+	c.TplName = "register.html"
 }
