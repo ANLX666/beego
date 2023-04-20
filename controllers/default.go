@@ -19,6 +19,9 @@ type IndexController struct {
 type GetUserList struct {
 	beego.Controller
 }
+type DeleteUser struct {
+	beego.Controller
+}
 
 func (c *MainController) Get() {
 	c.Data["Website"] = "1209322734.com"
@@ -56,6 +59,13 @@ func (c *IndexController) Post() {
 func (c *GetUserList) Get() {
 	UserList := models.GetUserArr()
 	c.Controller.Data["json"] = UserList
+	c.ServeJSON()
+	c.TplName = "user.tpl"
+}
+func (c *DeleteUser) Delete() {
+	id := c.Ctx.Input.Param(":id")
+	user := models.DeleteUser(id)
+	c.Controller.Data["json"] = user
 	c.ServeJSON()
 	c.TplName = "user.tpl"
 }

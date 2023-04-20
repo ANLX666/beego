@@ -69,3 +69,8 @@ func GetUserArr() []User {
 	fmt.Println(all)
 	return users
 }
+func DeleteUser(id string) int64 {
+	o := orm.NewOrm()
+	i, _ := o.QueryTable("users").Filter("id", id).Delete()
+	return i
+}
